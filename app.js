@@ -1,15 +1,24 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
-const mongoose = require("mongoose");
-const conn = require("./db/conn");
+const dotenv = require("dotenv");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-const auth = require("./router/auth");
+const auth = require("./routes/auth");
+const user = require("./Routes/user");
+const product = require("./Routes/product");
+const order = require("./Routes/order");
+const cart = require("./Routes/cart");
+const stripe = require("./Routes/stripe");
 
 app.use("/auth", auth);
+app.use("/user", user);
+app.use("/product", product);
+app.use("/order", order);
+app.use("/cart", cart);
+app.use("/stripe", stripe);
 
 //quando nao encontra rota
 app.use((req, res, next) => {
